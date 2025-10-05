@@ -256,6 +256,12 @@ body {
   font-weight: 400;
   background-color: #66bb6a;
   border-radius: 30px;
+  margin: 10px;
+}
+.wrapper .main .column .column__contenier .info .info__items .city .city__layout .city_air .aqi .aqi__column span {
+  font-size: 12px;
+  line-height: 28px;
+  font-weight: 500;
 }
 .wrapper .main .column .column__contenier .info .info__uptxt {
   font-size: 18px;
