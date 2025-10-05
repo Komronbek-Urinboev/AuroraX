@@ -1,11 +1,10 @@
 "use strict";
 
-// 🌍 OpenWeather config
+
 const apiKey = "f17cf39a84e70e760b06d5ad4ceae310";
 const apiUrl = "https://api.openweathermap.org/data/2.5/";
 const WAQI_TILE_TOKEN = "aa62c304b08d1f7f5d8f536a3ae6061424eb01cf";
 
-// 🤖 Gemini API config (рабочий)
 const GEMINI_API_KEY = "AIzaSyBQO89TC_kEQwSt7lqQJIwy7m5yaCw3y2g";
 const GEMINI_MODEL = "gemini-2.0-flash";
 
@@ -19,7 +18,6 @@ const AQI_RANGES = {
 
 let hourlyChart, map, marker;
 
-// 🌤 Get weather by city
 async function getWeather(city) {
   const url = `${apiUrl}weather?q=${city}&appid=${apiKey}&units=metric`;
   const res = await fetch(url);
@@ -27,7 +25,6 @@ async function getWeather(city) {
   return await res.json();
 }
 
-// 💨 Get air pollution
 async function getAQI(lat, lon) {
   const url = `${apiUrl}air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
   const res = await fetch(url);
@@ -41,7 +38,6 @@ async function getForecast(lat, lon) {
   return await res.json();
 }
 
-// 🗺️ Map setup
 function initMap() {
   map = L.map("map").setView([41.3123, 69.2787], 6);
 
@@ -68,7 +64,6 @@ function initMap() {
   });
 }
 
-// 🌍 Show weather (by city or coords)
 async function showWeather() {
   const city = document.getElementById("input").value.trim() || "Tashkent";
   if (!city) return;
@@ -87,7 +82,6 @@ async function showWeatherByCoords(lat, lon) {
   await renderWeather(data);
 }
 
-// 🧩 Render UI
 async function renderWeather(data) {
   const lat = data.coord.lat;
   const lon = data.coord.lon;
@@ -95,7 +89,7 @@ async function renderWeather(data) {
   const humidity = data.main.humidity;
   if (map && marker) {
     marker.setLatLng([lat, lon]);
-    map.setView([lat, lon], 10); // zoom = 10 (можно изменить)
+    map.setView([lat, lon], 10); // zoom = 10
   }
 
   const aqiData = await getAQI(lat, lon);
@@ -118,7 +112,6 @@ async function renderWeather(data) {
   await explainWeather(data.name, temperature, humidity, aqi, aqiInfo.status);
 }
 
-// ---------- Исправленная и надёжная инициализация графика ----------
 function initializeChart() {
   const canvas = document.getElementById('myChart');
   if (!canvas) return;
@@ -185,8 +178,6 @@ function initializeChart() {
   hourlyChart = new Chart(ctx, config);
 }
 
-// ---------- Исправленное обновление графика ----------
-// 📊 Update chart with real data from OpenWeather
 async function updateChart(lat, lon) {
   try {
     const forecast = await getForecast(lat, lon);
@@ -195,7 +186,6 @@ async function updateChart(lat, lon) {
     const temps = [];
     const humidities = [];
 
-    // Берём первые 12 интервалов (≈ 36 часов)
     forecast.list.slice(0, 12).forEach((f) => {
       const time = new Date(f.dt * 1000);
       const hour = time.getHours().toString().padStart(2, "0") + ":00";
@@ -204,7 +194,6 @@ async function updateChart(lat, lon) {
       humidities.push(f.main.humidity);
     });
 
-    // если график не создан — создаём новый
     if (!hourlyChart) {
       const ctx = document.getElementById("myChart").getContext("2d");
       hourlyChart = new Chart(ctx, {
@@ -254,7 +243,6 @@ async function updateChart(lat, lon) {
         },
       });
     } else {
-      // просто обновляем данные
       hourlyChart.data.labels = labels;
       hourlyChart.data.datasets[0].data = temps;
       hourlyChart.data.datasets[1].data = humidities;
@@ -265,14 +253,11 @@ async function updateChart(lat, lon) {
   }
 }
 
-
-// 🕒 Time
 function getTime() {
   const now = new Date();
   document.getElementById("time").textContent = now.toISOString().split("T")[0];
 }
 
-// 🤖 Gemini AI (из твоего рабочего кода)
 function parseGeminiText(resp) {
   if (!resp) return null;
   const paths = [
@@ -305,7 +290,6 @@ async function queryGemini(prompt) {
   return text;
 }
 
-// 🧠 Ask AI manually
 async function askAI(prompt) {
   const aiSend = document.getElementById("ai-send");
   const aiOut = document.getElementById("ai-output");
@@ -320,19 +304,13 @@ async function askAI(prompt) {
   }
 }
 
-// 🧩 Auto explanation when weather updates
 async function explainWeather(city, temp, humidity, aqi, status) {
   const prompt = `
     City: ${city}.
     Temperature: ${temp}°C.
     Humidity: ${humidity}%.
     Air Quality Index: ${aqi} (${status}).
-    You are an ecologist and a doctor.
-Give professional advice:
-- how do these conditions affect health?
-- is it safe to exercise outdoors?
-- who should limit their activity?
-- what precautions should be taken?
+    Give short health recommendation — can people exercise outdoors, and any precautions to take.
   `;
   document.getElementById("ai-output").textContent = "Thinking...";
   try {
@@ -343,7 +321,6 @@ Give professional advice:
   }
 }
 
-// 💬 Event listeners for AI chat
 document.getElementById("ai-send")?.addEventListener("click", async () => {
   const input = document.getElementById("ai-input").value.trim();
   if (!input) return;
@@ -357,7 +334,6 @@ document.getElementById("ai-input")?.addEventListener("keydown", (e) => {
   }
 });
 
-// 🚀 Initialize
 window.onload = function () {
   getTime();
   initializeChart();
@@ -372,4 +348,3 @@ window.onload = function () {
   // document.getElementById("input").value = "Tashkent";
   showWeather();
 };
-
