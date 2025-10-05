@@ -124,8 +124,12 @@ body {
   max-height: 36px;
 }
 .wrapper .main .map .map__contenier .map__seaarch button {
-  padding: 5px;
-  display: none;
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
 }
 .wrapper .main .map .map__contenier .map_items .header-map {
   text-align: center;
@@ -407,15 +411,4 @@ body {
   .wrapper .main .column .column__contenier .ai {
     max-width: 100%;
   }
-}
-
-/* Блок AI вывода */
-#ai-output {
-  max-height: 400px;   /* ограничение по высоте */
-  overflow-y: auto;    /* скролл */
-  padding: 12px;
-  border-radius: 10px;
-  background: #f9f9f9;
-  line-height: 1.5;
-  white-space: pre-wrap; /* сохраняем переносы */
 }
