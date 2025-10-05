@@ -327,7 +327,12 @@ async function explainWeather(city, temp, humidity, aqi, status) {
     Temperature: ${temp}°C.
     Humidity: ${humidity}%.
     Air Quality Index: ${aqi} (${status}).
-    Give short health recommendation — can people exercise outdoors, and any precautions to take.
+    You are an ecologist and a doctor.
+Give professional advice:
+- how do these conditions affect health?
+- is it safe to exercise outdoors?
+- who should limit their activity?
+- what precautions should be taken?
   `;
   document.getElementById("ai-output").textContent = "Thinking...";
   try {
@@ -367,3 +372,4 @@ window.onload = function () {
   // document.getElementById("input").value = "Tashkent";
   showWeather();
 };
+
