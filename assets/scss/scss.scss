@@ -264,6 +264,10 @@ body {font-family: "Inter", sans-serif;font-weight: 700; background-color: #f6f6
                                             font-weight: 400;
                                             background-color: #66BB6AFF;
                                             border-radius: 30px; 
+                                            margin: 10px;
+                                            spam {font-size: 12px;
+                                                line-height: 28px;
+                                                font-weight: 500;}
                                         }
                                         
                                     }
@@ -836,4 +840,5 @@ body {font-family: "Inter", sans-serif;font-weight: 700; background-color: #f6f6
         }
         .footer{}
     }
+
 }
