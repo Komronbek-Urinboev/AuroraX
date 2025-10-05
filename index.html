@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoCorono</title>
+    <link rel="stylesheet" href="src\assets\css\scss.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header__contenier ">
+                <a href="" class="header_logo">AirPulse</a>
+                <nav class="header_menu menu">
+                    <!-- <button class="menu_close">
+                            <img src="assets/img/close.svg" alt="close">
+                        </button> -->
+                    <ul class="menu_list">
+
+                        <!-- <a href="#" class="menu_link">
+                                <img src="assets\img\header\database.svg" alt="">
+                                Date
+                            </a> -->
+                        <!-- <a href="#" class="menu_link">
+                                <img src="assets\img\header\money.svg" alt="">
+                                
+                                Donations
+                            </a> -->
+                        <a href="#" class="menu_link">
+                            <img src="assets\img\header\info.svg" alt="">
+                            About As
+                        </a>
+
+                    </ul>
+
+                </nav>
+
+            </div>
+        </header>
+        <main class="main">
+            <section class="map">
+                <div class="map__contenier">
+                    <div class="map_items">
+                        <div class="map_header header-map">
+                            <h1 class="header-map_title">AirPulse: What is the air quality now?</h1>
+                            <div class="header-map_text">Real-time air quality monitoring and health recommendations
+                                globally. Your daily companion for a healthier life.</div>
+                        </div>
+
+                    </div>
+                    <div class="map__seaarch">
+                        <input type="text" required class="map__input" placeholder="Write city name"  autocomplete=" off"
+                            name="form" id="input" style="flex: 1;
+                                    padding: 15px;
+                                    border-radius: 6px;
+                                    border: 1px solid #ccc;
+                                    font-size: 14px;
+                                    min-height: 36px;
+                                    margin: 0 10px 0 0;">
+                        <button class="map_btn" type="submit" id="search-button"><img src="assets\img\header\search.svg"
+                                alt=""></button>
+                    </div>
+                    <!-- <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6141653.677389335!2d59.3258534504737!3d41.26850741425102!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b20a5d676b1%3A0xca0a6dad7e841e20!2z0KPQt9Cx0LXQutC40YHRgtCw0L0!5e0!3m2!1sru!2s!4v1758912465588!5m2!1sru!2s"
+                            style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+                    <div id="map"></div>
+                </div>
+            </section>
+            <section class="column">
+                <div class="column__contenier">
+                    <div class="column__info info">
+                        <div class="info__items">
+                            <div class="info__city city">
+                                <h2 class="city__title">London</h2>
+                                <div class="city__subtext">
+                                    <div class="city__coordinates h ">1.5074° N, 0.1278° E</div>
+                                    <div class="city__time h" id="time">--</div>
+                                </div>
+                                <div class="city__layout">
+                                    <div class="city__th">
+
+                                        <div class="city__temperature temperature">
+                                            <img src="assets\img\main\Cloud.svg" alt="">
+                                            <div class="temperature__value " id="temp">22°C</div>
+                                        </div>
+                                        <div class="city__humidity humidity">
+                                            <img src="assets\img\main\droplet.svg" alt="">
+                                            <div class="humidity__value" id="humidity">65%</div>
+                                        </div>
+                                    </div>
+                                    <div class="city_air">
+
+                                        <div class="city__aqi aqi">AQI:
+                                            <div class="aqi__column" id="aqiColumn">
+
+                                                <span id="aqi-status"></span>(<span id="aqi-value"></span>)
+                                            </div>
+                                        </div>
+
+                                        <span id="so2"></span>
+                                        <span id="pm10"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info__uptxt">24-Hour Forecast</div>
+                        <div class="info__graph">
+                            <canvas id="myChart" height="180"></canvas>
+                        </div>
+                    </div>
+                    <div class="column__ai ai">
+                        <div class="ai__items">
+                            <div class="ai__title">AirPulse Recommendation</div>
+                            <div class="ai__message" id="ai-message">
+                                <div id="ai-output" class="ai-output">Recommendations will appear here.</div>
+                                <div class="ai-controls">
+                                    <input id="ai-input" class="ai-input" type="text"
+                                        placeholder="Ask: e.g. 'Is it safe to exercise outdoors now?'" />
+                                    <button id="ai-send" class="ai-send" type="button">Ask AI</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    </section>
+    </main>
+    <!-- <footer class="footer">
+                <div class="footer__contenier">
+                    <div class="footer__contacts contacts-footer">
+                        <h2 class="contacts-footer__title">Your daily companion for a healthier life.</h2>
+                        <ul class="contacts-footer__list">
+                            <li class="contacts-footer__items"><a href="#" class="contacts-footer__link"><img src="assets\img\footer\facebook.svg" alt=""></a></li>
+                            <li class="contacts-footer__items"><a href="#" class="contacts-footer__link"><img src="assets\img\footer\twitter.svg" alt=""></a></li>
+                            <li class="contacts-footer__items"><a href="#" class="contacts-footer__link"><img src="assets\img\footer\instagram.svg" alt=""></a></li>
+                            <li class="contacts-footer__items"><a href="#" class="contacts-footer__link"><img src="assets\img\footer\linkedin.svg" alt=""></a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__column">
+                        <div class="footer__label">Company</div>
+                        <nav class="footer__menu menu-footer">
+                            <ul class="menu-footer__list">
+                                <li class="menu-footer__item"><a href="" class="mene-footer__link">About</a></li>
+                                <li class="menu-footer__item"><a href="" class="mene-footer__link">Careers</a></li>
+                                <li class="menu-footer__item"><a href="" class="mene-footer__link">Blog</a></li>
+                                <li class="menu-footer__item"><a href="" class="mene-footer__link">Press</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="footer__column">
+                        <div class="footer__label">Resources</div>
+                        <nav class="footer__menu menu-footer">
+                            <ul class="menu-footer__list">
+                                <li class="menu-footer__item"><a href="" class="mene-footer__link">API</a></li>
+                                <li class="menu-footer__item"><a href="" class="mene-footer__link">Documentation</a></li>
+                                <li class="menu-footer__item"><a href="" class="mene-footer__link">Support</a></li>
+                                <li class="menu-footer__item"><a href="" class="mene-footer__link">Pricing</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="footer__column">
+                        <div class="footer__label">Legal</div>
+                        <nav class="footer__menu menu-footer">
+                            <ul class="menu-footer__list">
+                                <li class="menu-footer__item"><a href="" class="mene-footer__link">Privacy Policy</a></li>
+                                <li class="menu-footer__item"><a href="" class="mene-footer__link">Terms of Service</a></li>
+                                <li class="menu-footer__item"><a href="" class="mene-footer__link">Cookie Policy</a></li>
+
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="footer__column">
+                        <div class="footer__label">Connect</div>
+                        <nav class="footer__menu menu-footer">
+                            <ul class="menu-footer__list">
+                                <li class="menu-footer__item"><a href="" class="mene-footer__link">Contact Us</a></li>
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+            </footer> -->
+    
+    </div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets\js\js.js"></script>
+
+    </script>
+</body>
+
+</html>
