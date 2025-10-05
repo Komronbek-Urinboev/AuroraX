@@ -385,7 +385,7 @@ body {
     margin: 0 auto;
   }
 }
-@media (max-width: 426.98px) {
+@media (max-width: 769.98px) {
   [class*=_contenier] {
     max-width: none;
     margin: 0 auto;
@@ -395,14 +395,16 @@ body {
     flex-direction: column;
   }
 }
-
-/* Блок AI вывода */
-#ai-output {
-  max-height: 400px;   /* ограничение по высоте */
-  overflow-y: auto;    /* скролл */
-  padding: 12px;
-  border-radius: 10px;
-  background: #f9f9f9;
-  line-height: 1.5;
-  white-space: pre-wrap; /* сохраняем переносы */
+@media (max-width: 426.98px) {
+  [class*=_contenier] {
+    max-width: none;
+    margin: 0 auto;
+  }
+  .wrapper .main .column .column__contenier {
+    display: flex;
+    flex-direction: column;
+  }
+  .wrapper .main .column .column__contenier .ai {
+    max-width: 100%;
+  }
 }
