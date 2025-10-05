@@ -408,3 +408,14 @@ body {
     max-width: 100%;
   }
 }
+
+/* Блок AI вывода */
+#ai-output {
+  max-height: 400px;   /* ограничение по высоте */
+  overflow-y: auto;    /* скролл */
+  padding: 12px;
+  border-radius: 10px;
+  background: #f9f9f9;
+  line-height: 1.5;
+  white-space: pre-wrap; /* сохраняем переносы */
+}
