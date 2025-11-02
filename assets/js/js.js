@@ -1,11 +1,11 @@
 "use strict";
 
 
-const apiKey = "f17cf39a84e70e760b06d5ad4ceae310";
+const apiKey = "OPENWEATHERAPIKEY";
 const apiUrl = "https://api.openweathermap.org/data/2.5/";
-const WAQI_TILE_TOKEN = "aa62c304b08d1f7f5d8f536a3ae6061424eb01cf";
+const WAQI_TILE_TOKEN = "WAQI_API_KEY";
 
-const GEMINI_API_KEY = "AIzaSyBQO89TC_kEQwSt7lqQJIwy7m5yaCw3y2g";
+const GEMINI_API_KEY = "GEMINI_API_KEY";
 const GEMINI_MODEL = "gemini-2.0-flash";
 
 const AQI_RANGES = {
@@ -353,4 +353,5 @@ window.onload = function () {
   // document.getElementById("input").value = "Tashkent";
   showWeather();
 };
+
 
